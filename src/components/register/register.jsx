@@ -3,21 +3,27 @@ import * as yup from "yup";
 import registerSchema from "../../validation/registerSchema";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import './register.styles.scss';
+import FormInput from "../form-input/form-input";
 
 export default function Register() {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const { push } = useHistory();
   const [formState, setFormState] = useState({
-    username: "",
-    password: "",
-    firstName: "",
-    location: ""
+   first_name: "",
+   last_name: "",
+   email: "",
+   username: "", 
+   password: "",
+   role_id: false
   });
   const [errors, setErrors] = useState({
-    username: "",
-    password: "",
-    firstName: "",
-    location: ""
+    first_name: "",
+   last_name: "",
+   email: "",
+   username: "", 
+   password: "",
+   role_id: false
   });
 
   useEffect(() => {
@@ -30,7 +36,7 @@ export default function Register() {
     e.preventDefault();
 
     axios
-      .post("auth/register", formState)
+      .post("/register", formState)
       .then(res => {
         console.log(res.data);
         push("/login");
@@ -64,20 +70,22 @@ export default function Register() {
 
     setFormState(newFormData);
   };
+  
   return (
-    <form>
-      <div className="register">
-        <h1>Register</h1>
+    <div className="sign-up">
+    <form className="sign-up-form">
+        <h1 className="title">Register</h1>
         <br />
         <label>
-          {errors.firstName.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.firstName}</p>
+     
+          {errors.first_name.length > 0 ? (
+            <p style={{ color: "red" }}>{errors.first_name}</p>
           ) : null}
-          <input
+          <FormInput
             type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formState.firstName}
+            name="first_name"
+            label="First Name"
+            value={formState.first_name}
             onChange={inputChange}
             required
           />
@@ -85,14 +93,29 @@ export default function Register() {
         <br />
         <br />
         <label>
-          {errors.location.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.location}</p>
+          {errors.last_name.length > 0 ? (
+            <p style={{ color: "red" }}>{errors.last_name}</p>
           ) : null}
           <input
             type="text"
-            name="location"
-            placeholder="Location"
-            value={formState.location}
+            name="last_name"
+            placeholder="Last Name"
+            value={formState.last_name}
+            onChange={inputChange}
+            required
+          />
+        </label>
+        <br />
+        <br />
+        <label>
+          {errors.email.length > 0 ? (
+            <p style={{ color: "red" }}>{errors.email}</p>
+          ) : null}
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={formState.email}
             onChange={inputChange}
             required
           />
@@ -112,14 +135,15 @@ export default function Register() {
             required
           />
         </label>
+
         <br />
         <br />
         <label>
           {errors.password.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.password}</p>
+            <p style={{ color: "red" }}>{errors.username}</p>
           ) : null}
           <input
-            type="password"
+            type="text"
             name="password"
             placeholder="Password"
             value={formState.password}
@@ -127,13 +151,37 @@ export default function Register() {
             required
           />
         </label>
+      
+        <br />
+        <br />
+        Are you an instructor? 
+        <br />
+        <br />
+        <label>
+            Yes!
+          {errors.role_id.length > 0 ? (
+            <p style={{ color: "red" }}>{errors.role_id}</p>
+          ) : null}
+          <input
+            type="checkbox"
+            name="role_id"
+            value={formState.role_id}
+            onChange={inputChange}
+          />
+          
+        </label>
         <br />
         <br />
         <button onClick={formSubmit} disabled={buttonDisabled}>
           Submit
         </button>
     
-      </div>
+
+    
+    
+    
+    
     </form>
+    </div>
   );
 }

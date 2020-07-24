@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import loginSchema from "../../validation/loginSchema";
 import axios from "axios";
-
+import "./login.styles.scss";
 
 function Login(props) {
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -67,8 +67,8 @@ function Login(props) {
 
   return (
     <form onSubmit={formSubmit}>
-      <div className="login">
-        <h1>Login</h1>
+      <div className="sign-in">
+        <h1 className="title">Login</h1>
         <label>
           {errors.username.length > 0 ? (
             <p style={{ color: "red" }}>{errors.username}</p>
