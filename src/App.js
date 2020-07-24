@@ -1,13 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from "react-redux";
+import {workoutAction} from "./state/actions/index.js";
+import Workouts from './components/banner/Workouts.js';
+import "./App.css";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-
+      <Workouts workouts={props.storeProps} />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    storeProps: state.workouts
+}};
+
+export default connect(mapStateToProps, {workoutAction})(App);
