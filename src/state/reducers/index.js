@@ -22,7 +22,7 @@ import {
           ...state,
           error: "",
           isFetching: false,
-          yourInitialState: action.payload // TODO add state property
+          yourInitialState: action.payload 
         };
       case FETCH_WORKOUT_FAILURE:
         return {

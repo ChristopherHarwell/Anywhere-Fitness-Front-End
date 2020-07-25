@@ -7,7 +7,7 @@ export const FETCH_WORKOUT_FAILURE = "FETCH_FAILURE";
 export const workoutAction = () => dispatch => {
   dispatch({ type: FETCH_WORKOUT_START });
   axiosWithAuth()
-    .get("your API endpoint goes here") // TODO add API endpoint
+    .get("https://anywhere-fitness-3.herokuapp.com/") // TODO add API endpoint
     .then(res => {
       dispatch({ type: FETCH_WORKOUT_SUCCESS,  
         payload: res.data }); // TODO add the rest of the payload after res.data like res.data.results
