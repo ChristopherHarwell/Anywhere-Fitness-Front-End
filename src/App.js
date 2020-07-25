@@ -1,46 +1,46 @@
-import React from 'react';
-<<<<<<< HEAD
-=======
-
->>>>>>> e18496ce006a6a73986b3bc8cc45150e05c95ce2
+import React from "react";
 import { connect } from "react-redux";
-import {workoutAction} from "./state/actions/index.js";
-import Workouts from './components/banner/Workouts.js';
+import { workoutAction } from "./state/actions/index.js";
+import Workouts from "./components/banner/Workouts.js";
 import "./App.css";
-<<<<<<< HEAD
-import Login from "./components/login/login";
-import Register from "./components/register/register";
-import './App.css';
-=======
 
 import Login from "./components/login/login";
 import Register from "./components/register/register";
-import './App.css';
-
->>>>>>> e18496ce006a6a73986b3bc8cc45150e05c95ce2
+import "./App.css";
+import PrivateRoute from "./utils/PrivateRoute.js";
+import { Link, Route } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 function App(props) {
   return (
     <div className="App">
-<<<<<<< HEAD
-      <Workouts workouts={props.storeProps} />
-    <Login/>
-    <Register/>
-=======
+      <Button variant="outlined" color="primary">
+        <Link to="/login">Login</Link>
+      </Button>
 
-      <Workouts workouts={props.storeProps} />
+      <Button variant="outlined" color="primary">
+        <Link to="/Register">Register</Link>
+      </Button>
 
-    <Login/>
-    <Register/>
+      <PrivateRoute exact path="/workouts">
+        {"//TODO add path based on API url"}
+        <Workouts workouts={props.storeProps} />
+      </PrivateRoute>
 
->>>>>>> e18496ce006a6a73986b3bc8cc45150e05c95ce2
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    storeProps: state.workouts
-}};
+    storeProps: state.workouts,
+  };
+};
 
-export default connect(mapStateToProps, {workoutAction})(App);
+export default connect(mapStateToProps, { workoutAction })(App);

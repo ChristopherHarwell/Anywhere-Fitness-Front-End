@@ -6,6 +6,6 @@ export const axiosWithAuth = () => {
     headers: {
       authorization: token
     },
-    baseURL: ""
+    baseURL: "" //TODO add API url
   });
 };
