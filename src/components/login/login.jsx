@@ -3,6 +3,8 @@ import * as yup from "yup";
 import loginSchema from "../../validation/loginSchema";
 import axios from "axios";
 import "./login.styles.scss";
+import FormInput from "../form-input/form-input"
+import Button from "@material-ui/core/Button";
 
 function Login(props) {
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -66,43 +68,46 @@ function Login(props) {
   };
 
   return (
-    <form onSubmit={formSubmit}>
-      <div className="sign-in">
-        <h1 className="title">Login</h1>
-        <label>
+    <div className="sign-up">
+    <h1 className="title">Login</h1>
+    <br/>
+    <form className="login-form" onSubmit={formSubmit}>
+   
+       
+    
           {errors.username.length > 0 ? (
             <p style={{ color: "red" }}>{errors.username}</p>
           ) : null}
-          <input
+          <FormInput
             type="text"
             name="username"
-            placeholder="Username"
+            label="Username"
             value={formState.username}
-            onChange={inputChange}
+            inputChange={inputChange}
           />
-        </label>
+      
         <br />
         <br />
-        <label>
+      
           {errors.password.length > 0 ? (
             <p style={{ color: "red" }}>{errors.password}</p>
           ) : null}
-          <input
+          <FormInput
             type="password"
             name="password"
-            placeholder="Password"
+            label="Password"
             value={formState.password}
-            onChange={inputChange}
+            inputChange={inputChange}
           />
-        </label>
-        <br />
-        <br />
-        <button onClick={formSubmit} disabled={buttonDisabled}>
-          Login
-        </button>
       
-      </div>
+        <br />
+        <br />
+        
     </form>
+    <Button onClick={formSubmit} disabled={buttonDisabled}>
+          Login
+        </Button>
+</div>
   );
 }
 
