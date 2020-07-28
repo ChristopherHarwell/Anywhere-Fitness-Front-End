@@ -7,18 +7,17 @@ import Footer from "./components/footer/footer";
 import PrivateRoute from "./utils/PrivateRoute.js";
 import Header from "./components/header/header";
 import { Route } from "react-router-dom";
-import {Switch} from "react-router";
+import { Switch } from "react-router";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import WorkoutClasses from "./components/classes/Workout-Classes.js";
 import { Button } from "@material-ui/core";
 
-
 function App(props) {
   function fetchWorkout(event) {
     event.preventDefault();
     props.getWorkout();
-  };
+  }
 
   return (
     <div className="App">
@@ -30,7 +29,10 @@ function App(props) {
 
       <Switch>
         <PrivateRoute exact path="/classes">
-        <WorkoutClasses classes={props.storeProps}/>
+          <WorkoutClasses classes={props.classes} />
+          <Button variant="outlined" onClick={fetchWorkout}>
+            Get Workouts
+          </Button>
         </PrivateRoute>
         <Route path="/login">
           <Login />
@@ -39,11 +41,8 @@ function App(props) {
           <Register />
         </Route>
         <Route path="/">
-          
-          <Button variant="outlined" onClick={fetchWorkout}>Get Workouts</Button>
         </Route>
       </Switch>
-
       <br />
       <br />
       <br />
@@ -54,9 +53,9 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("storeProps: ", state.initialState)
+  console.log("storeProps: ", state.classes);
   return {
-    storeProps: state.initialState,
+    classes: state.classes,
   };
 };
 

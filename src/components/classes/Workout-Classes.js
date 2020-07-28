@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { Card, CardContent, Typography } from "@material-ui/core";
 
@@ -10,7 +10,13 @@ const WorkoutClasses = (props) => {
           <Card>
             <CardContent>
               <Typography variant="h5" gutterBottom>
-                {workout.name}
+                Workout: {workout.name}
+              </Typography>
+              <Typography>
+                  Duration: {workout.duration} minutes
+              </Typography>
+              <Typography>
+                  Type: {workout.type}
               </Typography>
             </CardContent>
           </Card>

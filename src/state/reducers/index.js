@@ -5,20 +5,7 @@ import {
 } from "../actions";
 
 const initialState = {
-  classes: [{
-      class_id: "",
-      name: "",
-      instructor_id: "",
-      instructor_username: "",
-      type: "",
-      date: "",
-      start_time: "",
-      duration: "",
-      intensity: "",
-      location: "",
-      number_of_attendees: "",
-      max_class_size: "",
-  }],
+  classes: [],
   error: "",
   isFetching: false,
 };
@@ -35,7 +22,7 @@ function reducer(state = initialState, action) {
         ...state,
         error: "",
         isFetching: false,
-        initialState: action.payload,
+        classes: action.payload,
       };
     case GET_WORKOUT_FAILURE:
       return {
