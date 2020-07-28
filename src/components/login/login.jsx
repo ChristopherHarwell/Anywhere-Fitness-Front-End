@@ -3,62 +3,66 @@ import * as yup from "yup";
 import loginSchema from "../../validation/loginSchema";
 import axios from "axios";
 import "./login.styles.scss";
+import FormInput from "../form-input/form-input";
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 
 function Login(props) {
+  let { push } = useHistory();
+
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
- 
   const [formState, setFormState] = useState({
     username: "",
-    password: ""
+    password: "",
   });
   const [errors, setErrors] = useState({
     username: "",
-    password: ""
+    password: "",
   });
 
   useEffect(() => {
-    loginSchema.isValid(formState).then(valid => {
+    loginSchema.isValid(formState).then((valid) => {
       setButtonDisabled(!valid);
     });
   }, [formState]);
 
-  const formSubmit = e => {
+  const formSubmit = (e) => {
     e.preventDefault();
     axios
       .post("auth/login", formState)
-      .then(res => {
+      .then((res) => {
         window.localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.id);
         props.setLoggedState(true);
-       
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
+    push("/");
   };
 
-  const inputChange = e => {
+  const inputChange = (e) => {
     e.persist();
     const newFormData = {
       ...formState,
       [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value
+        e.target.type === "checkbox" ? e.target.checked : e.target.value,
     };
 
     yup
       .reach(loginSchema, e.target.name)
       .validate(e.target.value)
-      .then(valid => {
+      .then((valid) => {
         setErrors({
           ...errors,
-          [e.target.name]: ""
+          [e.target.name]: "",
         });
       })
-      .catch(err => {
+      .catch((err) => {
         setErrors({
           ...errors,
-          [e.target.name]: err.errors[0]
+          [e.target.name]: err.errors[0],
         });
       });
 
@@ -66,43 +70,42 @@ function Login(props) {
   };
 
   return (
-    <form onSubmit={formSubmit}>
-      <div className="sign-in">
-        <h1 className="title">Login</h1>
-        <label>
-          {errors.username.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.username}</p>
-          ) : null}
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formState.username}
-            onChange={inputChange}
-          />
-        </label>
+    <div className="sign-up">
+      <h1 className="title">Login</h1>
+      <br />
+      <form className="login-form" onSubmit={formSubmit}>
+        {errors.username.length > 0 ? (
+          <p style={{ color: "red" }}>{errors.username}</p>
+        ) : null}
+        <FormInput
+          type="text"
+          name="username"
+          label="Username"
+          value={formState.username}
+          inputChange={inputChange}
+        />
+
         <br />
         <br />
-        <label>
-          {errors.password.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.password}</p>
-          ) : null}
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formState.password}
-            onChange={inputChange}
-          />
-        </label>
+
+        {errors.password.length > 0 ? (
+          <p style={{ color: "red" }}>{errors.password}</p>
+        ) : null}
+        <FormInput
+          type="password"
+          name="password"
+          label="Password"
+          value={formState.password}
+          inputChange={inputChange}
+        />
+
         <br />
         <br />
-        <button onClick={formSubmit} disabled={buttonDisabled}>
-          Login
-        </button>
-      
-      </div>
-    </form>
+      </form>
+      <Button onClick={formSubmit} disabled={buttonDisabled}>
+        Login
+      </Button>
+    </div>
   );
 }
 
