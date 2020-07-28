@@ -5,8 +5,10 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import './register.styles.scss';
 import FormInput from "../form-input/form-input";
+import Button from "@material-ui/core/Button";
 
-export default function Register() {
+
+function Register() {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const { push } = useHistory();
   const [formState, setFormState] = useState({
@@ -73,115 +75,121 @@ export default function Register() {
   
   return (
     <div className="sign-up">
-    <form className="sign-up-form">
-        <h1 className="title">Register</h1>
-        <br />
-        <label>
-     
+      <h1 className="title">Register</h1>
+            <br/>
+        <form className="sign-up-form">
           {errors.first_name.length > 0 ? (
             <p style={{ color: "red" }}>{errors.first_name}</p>
           ) : null}
-          <FormInput
-            type="text"
-            name="first_name"
-            label="First Name"
-            value={formState.first_name}
-            onChange={inputChange}
-            required
-          />
-        </label>
-        <br />
-        <br />
-        <label>
-          {errors.last_name.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.last_name}</p>
-          ) : null}
-          <input
-            type="text"
-            name="last_name"
-            placeholder="Last Name"
-            value={formState.last_name}
-            onChange={inputChange}
-            required
-          />
-        </label>
-        <br />
-        <br />
-        <label>
-          {errors.email.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.email}</p>
-          ) : null}
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            value={formState.email}
-            onChange={inputChange}
-            required
-          />
-        </label>
-        <br />
-        <br />
-        <label>
-          {errors.username.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.username}</p>
-          ) : null}
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formState.username}
-            onChange={inputChange}
-            required
-          />
-        </label>
-
-        <br />
-        <br />
-        <label>
-          {errors.password.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.username}</p>
-          ) : null}
-          <input
-            type="text"
-            name="password"
-            placeholder="Password"
-            value={formState.password}
-            onChange={inputChange}
-            required
-          />
-        </label>
-      
-        <br />
-        <br />
-        Are you an instructor? 
-        <br />
-        <br />
-        <label>
-            Yes!
-          {errors.role_id.length > 0 ? (
-            <p style={{ color: "red" }}>{errors.role_id}</p>
-          ) : null}
-          <input
-            type="checkbox"
-            name="role_id"
-            value={formState.role_id}
-            onChange={inputChange}
-          />
+            <FormInput
+              type="text"
+              name="first_name"
+              label="First Name"
+              value={formState.first_name}
+              inputChange={inputChange}
+              required
+            />
+        
+              <br/>
+              <br/>
+        
+            {errors.last_name.length > 0 ? (
+              <p style={{ color: "red" }}>{errors.last_name}</p>
+            ) : null}
+              <FormInput
+                type="text"
+                name="last_name"
+                label="Last Name"
+                value={formState.last_name}
+                inputChange={inputChange}
+                required
+              />
           
-        </label>
-        <br />
-        <br />
-        <button onClick={formSubmit} disabled={buttonDisabled}>
-          Submit
-        </button>
-    
+                  <br/>
+                  <br/>
+            
+            {errors.email.length > 0 ? (
+              <p style={{ color: "red" }}>{errors.email}</p>
+            ) : null}
+              <FormInput
+                type="text"
+                name="email"
+                label="Email"
+                value={formState.email}
+                onChange={inputChange}
+                required
+              />
+        
+                  <br/>
+                  <br/>
+       
+            {errors.username.length > 0 ? (
+              <p style={{ color: "red" }}>{errors.username}</p>
+            ) : null}
+                <FormInput
+                  type="text"
+                  name="username"
+                  label="Username"
+                  value={formState.username}
+                  onChange={inputChange}
+                  required
+                />
+            
 
-    
-    
-    
-    
+                <br/>
+                <br/>
+          
+            {errors.password.length > 0 ? (
+              <p style={{ color: "red" }}>{errors.username}</p>
+            ) : null}
+              <FormInput
+                type="password"
+                name="password"
+                label="Password"
+                value={formState.password}
+                onChange={inputChange}
+                required
+              />
+                  <br/>
+                  <br/>
+
+
+        <div className="reg-instructor">
+        <div >
+        Are you registering as a fitness student or fitness trainer? 
+        </div>
+            <br/>
+            <br/>
+        <div className="reg-instructor-radio">
+        <div className="radio">
+          <label>
+            <input type="radio" value="student"/>
+            Fitness Student
+          </label>
+        </div>
+        <br/>
+        <div className="radio">
+          <label>
+            <input type="radio" value="trainer" />
+            Fitness Trainer
+          </label>
+        </div>
+          </div>
+          </div>
+            <br/>
+            <br/>
+     
     </form>
+    
+    <Button
+    onClick={formSubmit}
+    disabled={buttonDisabled}
+    >
+    Register
+    </Button>
+    
     </div>
   );
 }
+
+export default Register;

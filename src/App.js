@@ -1,29 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import { workoutAction } from "./state/actions/index.js";
-import Workouts from "./components/banner/Workouts.js";
+import Workouts from "./components/workout-form/Workouts.js";
 import "./App.css";
-
+import Footer from "./components/footer/footer"
+import PrivateRoute from "./utils/PrivateRoute.js";
+import Header from "./components/header/header";
+import { Route } from "react-router-dom";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
-import "./App.css";
-import PrivateRoute from "./utils/PrivateRoute.js";
-import { Link, Route } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { WorkoutClasses } from "./components/classes/Workout-Classes.js";
 
 function App(props) {
+
   return (
     <div className="App">
-      <Button variant="outlined" color="primary">
-        <Link to="/login">Login</Link>
-      </Button>
-
-      <Button variant="outlined" color="primary">
-        <Link to="/Register">Register</Link>
-      </Button>
-
-      <PrivateRoute exact path="/workouts">
-        {"//TODO add path based on API url"}
+      <Header/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+  
+      <PrivateRoute exact path="/classes">
         <Workouts workouts={props.storeProps} />
       </PrivateRoute>
 
@@ -33,6 +31,11 @@ function App(props) {
       <Route path="/register">
         <Register />
       </Route>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <Footer/>
     </div>
   );
 }
