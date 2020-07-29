@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getWorkout } from "./state/actions/index.js";
+import { getWorkout, putWorkout } from "./state/actions/index.js";
 import Workouts from "./components/workout-form/Workouts.js";
 import "./App.css";
 import Footer from "./components/footer/footer";
@@ -18,6 +18,10 @@ function App(props) {
     event.preventDefault();
     props.getWorkout();
   }
+  function putWorkout(event) {
+    event.preventDefault();
+    props.putWorkout();
+  }
 
   return (
     <div className="App">
@@ -29,7 +33,7 @@ function App(props) {
 
       <Switch>
         <PrivateRoute exact path="/classes">
-          <WorkoutClasses classes={props.classes} />
+          <WorkoutClasses edit={putWorkout} classes={props.classes} />
           <Button variant="outlined" onClick={fetchWorkout}>
             Get Workouts
           </Button>
@@ -53,7 +57,7 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("storeProps: ", state.classes);
+  console.log("storeProps: ", state);
   return {
     classes: state.classes,
   };

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { Card, CardContent, Typography, Button } from "@material-ui/core";
 
+ //TODO add onClick for buttons as well as routing
 const WorkoutClasses = (props) => {
   return (
     <>
@@ -15,8 +16,8 @@ const WorkoutClasses = (props) => {
               <Typography>Duration: {workout.duration} minutes</Typography>
               <Typography>Type: {workout.type}</Typography>
             </CardContent>
-            <Button variant="outlined" color="primary">Edit</Button> // TODO add onClick for buttons as well as routing
-            <Button variant="outlined" color="secondary">Delete</Button>
+            <Button onClick="edit" variant="outlined" color="primary">Edit</Button>
+            <Button onClick="delete" variant="outlined" color="secondary">Delete</Button>
           </Card>
         ))}
       </div>
