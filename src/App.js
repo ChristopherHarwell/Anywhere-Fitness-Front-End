@@ -6,7 +6,7 @@ import "./App.css";
 import Footer from "./components/footer/footer";
 import PrivateRoute from "./utils/PrivateRoute.js";
 import Header from "./components/header/header";
-import { Route, useHistory } from "react-router-dom";
+import { Route, useHistory, Link } from "react-router-dom";
 import { Switch } from "react-router";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
@@ -21,7 +21,7 @@ function App(props) {
     props.getWorkout();
   }
   function editWorkout(event) {
-    push("/edit/classes")
+    push("/edit/classes");
     event.preventDefault();
   }
 
@@ -39,9 +39,9 @@ function App(props) {
         </PrivateRoute>
         <PrivateRoute exact path="/classes">
           <WorkoutClasses edit={editWorkout} classes={props.getClasses} />
-          <Button variant="outlined" onClick={fetchWorkout}>
-            Get Workouts
-          </Button>
+            <Button variant="outlined" onClick={fetchWorkout}>
+              Get Workouts
+            </Button>
         </PrivateRoute>
         <Route path="/login">
           <Login />

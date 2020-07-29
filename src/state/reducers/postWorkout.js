@@ -4,13 +4,8 @@ import {
   POST_WORKOUT_FAILURE,
 } from "../actions";
 
-// import { initialState } from "./initialState";
+import { initialState } from "./initialState";
 
-const initialState = {
-  classes: [],
-  error: "",
-  isFetching: false,
-};
 function postWorkout(state = initialState, action) {
   switch (action.type) {
     case POST_WORKOUT_START:

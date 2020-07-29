@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, Typography, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-//TODO add onClick for buttons as well as routing
+//TODO add the rest of the workout data
 const WorkoutClasses = (props) => {
   return (
     <>
@@ -15,12 +15,13 @@ const WorkoutClasses = (props) => {
               </Typography>
               <Typography>Duration: {workout.duration} minutes</Typography>
               <Typography>Type: {workout.type}</Typography>
+        <Typography>Start Date: {workout.date}</Typography>
             </CardContent>
-            <Link to="/edit/classes">
+
               <Button onClick={props.edit} variant="outlined" color="primary">
                 Edit
               </Button>
-            </Link>
+
 
             <Button onClick={props.delete} variant="outlined" color="secondary">
               Delete

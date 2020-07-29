@@ -13,6 +13,10 @@ export const PUT_WORKOUT_START = "PUT_START";
 export const PUT_WORKOUT_SUCCESS = "PUT_SUCCESS";
 export const PUT_WORKOUT_FAILURE = "PUT_FAILURE";
 
+export const DELETE_WORKOUT_START = "DELETE_START";
+export const DELETE_WORKOUT_SUCCESS = "DELETE_SUCCESS";
+export const DELETE_WORKOUT_FAILURE = "DELETE_FAILURE";
+
 export const getWorkout = () => (dispatch) => {
   dispatch({ type: GET_WORKOUT_START });
   Axios
@@ -48,5 +52,19 @@ export const putWorkout = () => (dispatch) => {
     })
     .catch((error) => {
       dispatch({type: PUT_WORKOUT_FAILURE, payload: error.response})
+    })
+};
+
+
+//TODO fix this deleteWorkout function so it will allow you to delete data
+export const deleteWorkout = () => (dispatch) => {
+  dispatch({ type: PUT_WORKOUT_START });
+  axiosWithAuth()
+    .delete("/classes")
+    .then((res) => {
+      dispatch({type: DELETE_WORKOUT_SUCCESS, payload: res.data});
+    })
+    .catch((error) => {
+      dispatch({type: DELETE_WORKOUT_FAILURE, payload: error.response})
     })
 };
