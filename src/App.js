@@ -1,49 +1,70 @@
 import React from "react";
 import { connect } from "react-redux";
-import { workoutAction } from "./state/actions/index.js";
+import { getWorkout, putWorkout } from "./state/actions/index.js";
 import Workouts from "./components/workout-form/Workouts.js";
 import "./App.css";
-import Footer from "./components/footer/footer"
+import Footer from "./components/footer/footer";
 import PrivateRoute from "./utils/PrivateRoute.js";
 import Header from "./components/header/header";
-import { Route } from "react-router-dom";
+import { Route, useHistory, Link } from "react-router-dom";
+import { Switch } from "react-router";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
-import { WorkoutClasses } from "./components/classes/Workout-Classes.js";
+import WorkoutClasses from "./components/classes/Workout-Classes.js";
+import { Button } from "@material-ui/core";
 
 function App(props) {
+  const { push } = useHistory();
+
+  function fetchWorkout(event) {
+    event.preventDefault();
+    props.getWorkout();
+  }
+  function editWorkout(event) {
+    push("/edit/classes");
+    event.preventDefault();
+  }
 
   return (
     <div className="App">
-      <Header/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-  
-      <PrivateRoute exact path="/classes">
-        <Workouts workouts={props.storeProps} />
-      </PrivateRoute>
+      <Header />
+      <br />
+      <br />
+      <br />
+      <br />
 
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/register">
-        <Register />
-      </Route>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <Footer/>
+      <Switch>
+        <PrivateRoute exact path="/edit/classes">
+          <Workouts />
+        </PrivateRoute>
+        <PrivateRoute exact path="/classes">
+          <WorkoutClasses edit={editWorkout} classes={props.getClasses} />
+            <Button variant="outlined" onClick={fetchWorkout}>
+              Get Workouts
+            </Button>
+        </PrivateRoute>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/"></Route>
+      </Switch>
+      <br />
+      <br />
+      <br />
+      <br />
+      <Footer />
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
+  console.log("storeProps: ", state.putWorkout.classes);
   return {
-    storeProps: state.workouts,
+    getClasses: state.getWorkout.classes,
   };
 };
 
-export default connect(mapStateToProps, { workoutAction })(App);
+export default connect(mapStateToProps, { getWorkout, putWorkout })(App);

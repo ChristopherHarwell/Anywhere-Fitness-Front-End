@@ -27,6 +27,7 @@ function Login(props) {
     });
   }, [formState]);
 
+
   const formSubmit = (e) => {
     e.preventDefault();
     axios
@@ -39,7 +40,7 @@ function Login(props) {
       .catch((err) => {
         console.log(err);
       });
-    push("/");
+    push("/classes");
   };
 
   const inputChange = (e) => {
