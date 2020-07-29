@@ -19,11 +19,10 @@ export const getWorkout = () => (dispatch) => {
     .get("http://localhost:8000/api/classes")
     .then((res) => {
       console.log("Res.data: ", res.data);
-      dispatch({ type: GET_WORKOUT_SUCCESS, payload: res.data }); // TODO add the rest of the payload after res.data like res.data.results
+      dispatch({ type: GET_WORKOUT_SUCCESS, payload: res.data });
     })
     .catch((err) => {
-      // TODO add action to be taken when error happens
-      dispatch({ type: GET_WORKOUT_FAILURE, payload: err.response }); // TODO add the rest of the payload after err.response like err.response.data
+      dispatch({ type: GET_WORKOUT_FAILURE, payload: err.response });
     });
 };
 
@@ -39,6 +38,7 @@ export const postWorkout = () => (dispatch) => {
     })
 };
 
+//TODO fix this putWorkout function so it will allow you to edit data
 export const putWorkout = () => (dispatch) => {
   dispatch({ type: PUT_WORKOUT_START });
   axiosWithAuth()

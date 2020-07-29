@@ -33,7 +33,7 @@ function App(props) {
 
       <Switch>
         <PrivateRoute exact path="/classes">
-          <WorkoutClasses edit={putWorkout} classes={props.classes} />
+          <WorkoutClasses edit={putWorkout} classes={props.getClasses} />
           <Button variant="outlined" onClick={fetchWorkout}>
             Get Workouts
           </Button>
@@ -57,10 +57,10 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("storeProps: ", state);
+  console.log("storeProps: ", state.putWorkout.classes);
   return {
-    classes: state.classes,
+    getClasses: state.getWorkout.classes,
   };
 };
 
-export default connect(mapStateToProps, { getWorkout })(App);
+export default connect(mapStateToProps, { getWorkout, putWorkout })(App);

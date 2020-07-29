@@ -16,8 +16,8 @@ const WorkoutClasses = (props) => {
               <Typography>Duration: {workout.duration} minutes</Typography>
               <Typography>Type: {workout.type}</Typography>
             </CardContent>
-            <Button onClick="edit" variant="outlined" color="primary">Edit</Button>
-            <Button onClick="delete" variant="outlined" color="secondary">Delete</Button>
+            <Button onClick={props.edit} variant="outlined" color="primary">Edit</Button>
+            <Button onClick={props.delete} variant="outlined" color="secondary">Delete</Button>
           </Card>
         ))}
       </div>
