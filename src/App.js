@@ -6,7 +6,7 @@ import "./App.css";
 import Footer from "./components/footer/footer";
 import PrivateRoute from "./utils/PrivateRoute.js";
 import Header from "./components/header/header";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import { Switch } from "react-router";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
@@ -14,13 +14,15 @@ import WorkoutClasses from "./components/classes/Workout-Classes.js";
 import { Button } from "@material-ui/core";
 
 function App(props) {
+  const { push } = useHistory();
+
   function fetchWorkout(event) {
     event.preventDefault();
     props.getWorkout();
   }
-  function putWorkout(event) {
+  function editWorkout(event) {
+    push("/edit/classes")
     event.preventDefault();
-    props.putWorkout();
   }
 
   return (
@@ -32,8 +34,11 @@ function App(props) {
       <br />
 
       <Switch>
+        <PrivateRoute exact path="/edit/classes">
+          <Workouts />
+        </PrivateRoute>
         <PrivateRoute exact path="/classes">
-          <WorkoutClasses edit={putWorkout} classes={props.getClasses} />
+          <WorkoutClasses edit={editWorkout} classes={props.getClasses} />
           <Button variant="outlined" onClick={fetchWorkout}>
             Get Workouts
           </Button>
@@ -44,8 +49,7 @@ function App(props) {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/">
-        </Route>
+        <Route path="/"></Route>
       </Switch>
       <br />
       <br />

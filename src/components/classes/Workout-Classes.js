@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import React from "react";
 import { Card, CardContent, Typography, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
- //TODO add onClick for buttons as well as routing
+//TODO add onClick for buttons as well as routing
 const WorkoutClasses = (props) => {
   return (
     <>
@@ -16,8 +16,15 @@ const WorkoutClasses = (props) => {
               <Typography>Duration: {workout.duration} minutes</Typography>
               <Typography>Type: {workout.type}</Typography>
             </CardContent>
-            <Button onClick={props.edit} variant="outlined" color="primary">Edit</Button>
-            <Button onClick={props.delete} variant="outlined" color="secondary">Delete</Button>
+            <Link to="/edit/classes">
+              <Button onClick={props.edit} variant="outlined" color="primary">
+                Edit
+              </Button>
+            </Link>
+
+            <Button onClick={props.delete} variant="outlined" color="secondary">
+              Delete
+            </Button>
           </Card>
         ))}
       </div>
