@@ -1,11 +1,24 @@
+.header {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
 .header-title {
     text-align: start;
     padding: 70px;
     color: white;
     background-color: rgb(8,8,8);
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
 }
 
 .nav-buttons {
     display: flex;
-    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    width: 20%;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+
 
 //TODO add the rest of the workout data
 const WorkoutClasses = (props) => {

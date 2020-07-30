@@ -3,16 +3,15 @@ import { connect } from "react-redux";
 import { getWorkout, putWorkout } from "./state/actions/index.js";
 import Workouts from "./components/workout-form/Workouts.js";
 import "./App.css";
-import Footer from "./components/footer/footer";
 import PrivateRoute from "./utils/PrivateRoute.js";
 import Header from "./components/header/header";
-import { Route, useHistory, Link } from "react-router-dom";
+import { Route, useHistory} from "react-router-dom";
 import { Switch } from "react-router";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import WorkoutClasses from "./components/classes/Workout-Classes.js";
 import { Button } from "@material-ui/core";
-
+import Footer from "./components/footer/footer"
 function App(props) {
   const { push } = useHistory();
 
@@ -57,7 +56,7 @@ function App(props) {
       <br />
       <br />
       <br />
-      <Footer />
+    <Footer/>
     </div>
   );
 }

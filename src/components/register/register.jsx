@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import registerSchema from "../../validation/registerSchema";
-import axios from "axios";
+
 import { useHistory } from "react-router-dom";
 import './register.styles.scss';
 import FormInput from "../form-input/form-input";
 import Button from "@material-ui/core/Button";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 
 function Register() {
@@ -17,7 +18,7 @@ function Register() {
    email: "",
    username: "", 
    password: "",
-   role_id: false
+   role_id: null
   });
   const [errors, setErrors] = useState({
     first_name: "",
@@ -25,7 +26,7 @@ function Register() {
    email: "",
    username: "", 
    password: "",
-   role_id: false
+   role_id: null
   });
 
   useEffect(() => {
@@ -36,9 +37,8 @@ function Register() {
 
   const formSubmit = e => {
     e.preventDefault();
-
-    axios
-      .post("/register", formState)
+    axiosWithAuth()
+      .post("auth/register", formState)
       .then(res => {
         console.log(res.data);
         push("/login");
@@ -155,27 +155,21 @@ function Register() {
 
 
         <div className="reg-instructor">
-        <div >
-        Are you registering as a fitness student or fitness trainer? 
-        </div>
-            <br/>
-            <br/>
-        <div className="reg-instructor-radio">
-        <div className="radio">
-          <label>
-            <input type="radio" value="student"/>
-            Fitness Student
-          </label>
-        </div>
+        Are you a Student or Trainer?
         <br/>
-        <div className="radio">
-          <label>
-            <input type="radio" value="trainer" />
-            Fitness Trainer
-          </label>
+        <br/>
+              <select 
+              name="role_id"
+              value={formState.role_id}
+              onChange={inputChange}
+              >
+                <option>--Select One--</option>
+                <option value="1">Student</option>
+                <option value="2">Trainer</option>
+              </select>
         </div>
-          </div>
-          </div>
+         
+          
             <br/>
             <br/>
      
