@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import loginSchema from "../../validation/loginSchema";
-import axios from "axios";
+
 import "./login.styles.scss";
 import FormInput from "../form-input/form-input";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 function Login(props) {
   let { push } = useHistory();
@@ -30,7 +31,7 @@ function Login(props) {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    axios
+    axiosWithAuth()
       .post("auth/login", formState)
       .then((res) => {
         window.localStorage.setItem("token", res.data.token);

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import registerSchema from "../../validation/registerSchema";
-import axios from "axios";
+
 import { useHistory } from "react-router-dom";
 import './register.styles.scss';
 import FormInput from "../form-input/form-input";
 import Button from "@material-ui/core/Button";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 
 function Register() {
@@ -36,9 +37,8 @@ function Register() {
 
   const formSubmit = e => {
     e.preventDefault();
-
-    axios
-      .post("/register", formState)
+    axiosWithAuth()
+      .post("auth/register", formState)
       .then(res => {
         console.log(res.data);
         push("/login");
