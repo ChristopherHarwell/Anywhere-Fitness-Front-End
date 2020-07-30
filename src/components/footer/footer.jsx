@@ -4,12 +4,13 @@ import "./footer-styles.scss";
 
 function Footer() {
   return (
-    <div>
- <h1 className="footer-title">anywhere-fitness</h1>
+    <div className="footer">
+ 
+ <h1 className="footer-title">
+ anywhere-fitness
+ </h1>
 
 
-
-     
     </div>
   );
 }

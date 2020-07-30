@@ -6,11 +6,10 @@ import "./header-styles.scss";
 
 function Header() {
   return (
-    <div >
+    <div className="header">
      
       
     <div className="nav-buttons">
-
           <Button 
           variant="outlined" 
           color="primary"
@@ -27,7 +26,6 @@ function Header() {
           <Button variant="outlined" color="primary">
             <Link className="nav-button" to="/Register">Register</Link>
           </Button>
-
     </div>
 
           <h1 className="header-title">
