@@ -18,7 +18,7 @@ function Register() {
    email: "",
    username: "", 
    password: "",
-   role_id: false
+   role_id: null
   });
   const [errors, setErrors] = useState({
     first_name: "",
@@ -26,7 +26,7 @@ function Register() {
    email: "",
    username: "", 
    password: "",
-   role_id: false
+   role_id: null
   });
 
   useEffect(() => {
@@ -155,27 +155,21 @@ function Register() {
 
 
         <div className="reg-instructor">
-        <div >
-        Are you registering as a fitness student or fitness trainer? 
-        </div>
-            <br/>
-            <br/>
-        <div className="reg-instructor-radio">
-        <div className="radio">
-          <label>
-            <input type="radio" value="student"/>
-            Fitness Student
-          </label>
-        </div>
+        Are you a Student or Trainer?
         <br/>
-        <div className="radio">
-          <label>
-            <input type="radio" value="trainer" />
-            Fitness Trainer
-          </label>
+        <br/>
+              <select 
+              name="role_id"
+              value={formState.role_id}
+              onChange={inputChange}
+              >
+                <option>--Select One--</option>
+                <option value="1">Student</option>
+                <option value="2">Trainer</option>
+              </select>
         </div>
-          </div>
-          </div>
+         
+          
             <br/>
             <br/>
      
