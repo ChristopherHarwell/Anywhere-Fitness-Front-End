@@ -43,13 +43,21 @@ export const postWorkout = () => (dispatch) => {
 };
 
 //TODO fix this putWorkout function so it will allow you to edit data
-export const putWorkout = () => (dispatch) => {
+export const putWorkout = (newData, onComplete) => (dispatch) => {
   dispatch({ type: PUT_WORKOUT_START });
   const { id } = useParams();
   axiosWithAuth()
-    .put(`/classes/${id}`)
+    .put(`/classes/${id}`, newData)
     .then((res) => {
-      dispatch({ type: PUT_WORKOUT_SUCCESS, payload: res.data });
+      axiosWithAuth()
+        .get("/classes")
+        .then((res) =>
+          dispatch({
+            type: PUT_WORKOUT_SUCCESS,
+            payload: res.data,
+          }), 
+          onComplete()
+        )
     })
     .catch((error) => {
       dispatch({ type: PUT_WORKOUT_FAILURE, payload: error.response });

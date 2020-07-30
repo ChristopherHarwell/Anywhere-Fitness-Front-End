@@ -21,7 +21,6 @@ function App(props) {
     props.getWorkout();
   }
   function editWorkout(event) {
-    push("/edit/classes");
     event.preventDefault();
   }
 
@@ -35,13 +34,16 @@ function App(props) {
 
       <Switch>
         <PrivateRoute exact path="/edit/classes">
-          <Workouts />
+          <Workouts
+            saveWorkout={props.putClasses}
+            name={props.getClasses.name}
+          />
         </PrivateRoute>
         <PrivateRoute exact path="/classes">
           <WorkoutClasses edit={editWorkout} classes={props.getClasses} />
-            <Button variant="outlined" onClick={fetchWorkout}>
-              Get Workouts
-            </Button>
+          <Button variant="outlined" onClick={fetchWorkout}>
+            Get Workouts
+          </Button>
         </PrivateRoute>
         <Route path="/login">
           <Login />
@@ -64,6 +66,7 @@ const mapStateToProps = (state) => {
   console.log("storeProps: ", state.putWorkout.classes);
   return {
     getClasses: state.getWorkout.classes,
+    putClasses: state.putWorkout.classes,
   };
 };
 
