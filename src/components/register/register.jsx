@@ -18,7 +18,7 @@ function Register() {
    email: "",
    username: "", 
    password: "",
-   role_id: null
+   role_id: ""
   });
   const [errors, setErrors] = useState({
     first_name: "",
@@ -26,7 +26,7 @@ function Register() {
    email: "",
    username: "", 
    password: "",
-   role_id: null
+   role_id: ""
   });
 
   useEffect(() => {
@@ -159,13 +159,12 @@ function Register() {
         <br/>
         <br/>
               <select 
-              name="role_id"
+           
               value={formState.role_id}
               onChange={inputChange}
               >
-                <option>--Select One--</option>
-                <option value="1">Student</option>
-                <option value="2">Trainer</option>
+                <option name="role_id" value="client">Student</option>
+                <option name="role_id" value="instructor">Trainer</option>
               </select>
         </div>
          
