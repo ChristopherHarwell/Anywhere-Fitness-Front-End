@@ -23,20 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Workouts(props) {
-  const { goBack } = useHistory();
   const classes = useStyles();
-
-  // function saveButton() {
-  //   goBack();
-  //   props.editWorkout();
-
-  // }
-  // const [formData] = useState();
-  
-  // const handleSubmit = () => {
-  //   putWorkout(formData, () => goBack());
-  //   push("/edit/classes");
-  // };
 
   return (
     <Card className={classes.root}>

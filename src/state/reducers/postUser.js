@@ -1,26 +1,26 @@
 import {
-  POST_WORKOUT_START,
-  POST_WORKOUT_SUCCESS,
-  POST_WORKOUT_FAILURE,
+  POST_USER_START,
+  POST_USER_SUCCESS,
+  POST_USER_FAILURE,
 } from "../actions";
 
 import { initialState } from "./initialState";
 
-function postWorkout(state = initialState, action) {
+function postUser(state = initialState, action) {
   switch (action.type) {
-    case POST_WORKOUT_START:
+    case POST_USER_START:
       return {
         ...state,
         isFetching: true,
       };
-    case POST_WORKOUT_SUCCESS:
+    case POST_USER_SUCCESS:
       return {
         ...state,
         error: "",
         isFetching: false,
         classes: action.payload,
       };
-    case POST_WORKOUT_FAILURE:
+    case POST_USER_FAILURE:
       return {
         ...state,
         error: action.payload,
@@ -31,4 +31,4 @@ function postWorkout(state = initialState, action) {
   }
 }
 
-export default postWorkout;
+export default postUser;

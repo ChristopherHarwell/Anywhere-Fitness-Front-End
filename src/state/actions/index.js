@@ -6,9 +6,9 @@ export const GET_WORKOUT_START = "FETCH_START";
 export const GET_WORKOUT_SUCCESS = "FETCH_SUCCESS";
 export const GET_WORKOUT_FAILURE = "FETCH_FAILURE";
 
-export const POST_WORKOUT_START = "POST_START";
-export const POST_WORKOUT_SUCCESS = "POST_SUCCESS";
-export const POST_WORKOUT_FAILURE = "POST_FAILURE";
+export const POST_USER_START = "POST_START";
+export const POST_USER_SUCCESS = "POST_SUCCESS";
+export const POST_USER_FAILURE = "POST_FAILURE";
 
 export const PUT_WORKOUT_START = "PUT_START";
 export const PUT_WORKOUT_SUCCESS = "PUT_SUCCESS";
@@ -30,15 +30,15 @@ export const getWorkout = () => (dispatch) => {
     });
 };
 
-export const postWorkout = () => (dispatch) => {
-  dispatch({ type: POST_WORKOUT_START });
+export const postUser = () => (dispatch) => {
+  dispatch({ type: POST_USER_START });
   axiosWithAuth()
     .post("/classes")
     .then((res) => {
-      dispatch({ type: POST_WORKOUT_SUCCESS, payload: res.data });
+      dispatch({ type: POST_USER_SUCCESS, payload: res.data });
     })
     .catch((error) => {
-      dispatch({ type: POST_WORKOUT_FAILURE, payload: error.response });
+      dispatch({ type: POST_USER_FAILURE, payload: error.response });
     });
 };
 

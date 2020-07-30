@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 
 import putWorkout from "./putWorkout";
 import getWorkout from "./getWorkout";
-import postWorkout from "./postWorkout";
+import postUser from "./postUser";
 
 export default combineReducers({
   putWorkout,
   getWorkout,
-  postWorkout
+  postUser
 });
