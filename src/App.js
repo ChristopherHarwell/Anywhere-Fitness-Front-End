@@ -13,8 +13,6 @@ import WorkoutClasses from "./components/classes/Workout-Classes.js";
 import { Button } from "@material-ui/core";
 import Footer from "./components/footer/footer"
 function App(props) {
-  const { push } = useHistory();
-
   function fetchWorkout(event) {
     event.preventDefault();
     props.getWorkout();
@@ -35,7 +33,7 @@ function App(props) {
         <PrivateRoute exact path="/edit/classes">
           <Workouts
             saveWorkout={props.putClasses}
-            name={props.getClasses.name}
+            deleteWorkout={props.deleteClasses}
           />
         </PrivateRoute>
         <PrivateRoute exact path="/classes">

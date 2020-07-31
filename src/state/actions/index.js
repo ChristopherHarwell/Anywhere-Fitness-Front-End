@@ -66,7 +66,7 @@ export const putWorkout = (newData, onComplete) => (dispatch) => {
 
 //TODO fix this deleteWorkout function so it will allow you to delete data
 export const deleteWorkout = () => (dispatch) => {
-  dispatch({ type: PUT_WORKOUT_START });
+  dispatch({ type: DELETE_WORKOUT_START });
   const { id } = useParams();
   axiosWithAuth()
     .delete(`/classes/${id}`)

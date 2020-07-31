@@ -91,6 +91,4 @@ function Workouts(props) {
     </Card>
   );
 }
-// connect({}, {putWorkout})(Workouts);
-
 export default Workouts;

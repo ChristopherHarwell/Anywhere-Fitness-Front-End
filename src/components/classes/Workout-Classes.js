@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, CardContent, Typography, Button } from "@material-ui/core";
 
+import {deleteWorkout} from "../../state/actions/index.js";
+import { connect } from "react-redux";
 
 //TODO add the rest of the workout data
 const WorkoutClasses = (props) => {
@@ -32,5 +34,13 @@ const WorkoutClasses = (props) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    delete: state.deleteWorkout.classes,
+  };
+};
+
+connect(mapStateToProps, { deleteWorkout })(WorkoutClasses);
 
 export default WorkoutClasses;
