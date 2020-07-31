@@ -33,4 +33,5 @@ const WorkoutClasses = (props) => {
   );
 };
 
+
 export default WorkoutClasses;

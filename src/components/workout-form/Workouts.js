@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, makeStyles, Card, Button } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Workouts(props) {
-  const { goBack } = useHistory();
   const classes = useStyles();
+
   return (
     <Card className={classes.root}>
       <form className={classes.form} noValidate autoComplete="off">
@@ -61,7 +62,7 @@ function Workouts(props) {
           <TextField
             id="outlined-helperText"
             label="Name"
-            defaultValue=""
+            defaultValue={props.name}
             helperText="Name of Instructor"
             variant="outlined"
           />
@@ -81,7 +82,7 @@ function Workouts(props) {
             size="medium"
             className={classes.button}
             startIcon={<SaveIcon />}
-            onClick={goBack}
+            onClick={props.saveWorkout}
           >
             Save
           </Button>
@@ -90,5 +91,4 @@ function Workouts(props) {
     </Card>
   );
 }
-
 export default Workouts;

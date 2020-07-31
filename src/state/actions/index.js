@@ -1,14 +1,13 @@
 import { axiosWithAuth } from "../../utils/axiosWithAuth.js";
 import Axios from "axios";
-import { useParams } from "react-router-dom";
 
 export const GET_WORKOUT_START = "FETCH_START";
 export const GET_WORKOUT_SUCCESS = "FETCH_SUCCESS";
 export const GET_WORKOUT_FAILURE = "FETCH_FAILURE";
 
-export const POST_WORKOUT_START = "POST_START";
-export const POST_WORKOUT_SUCCESS = "POST_SUCCESS";
-export const POST_WORKOUT_FAILURE = "POST_FAILURE";
+export const POST_USER_START = "POST_START";
+export const POST_USER_SUCCESS = "POST_SUCCESS";
+export const POST_USER_FAILURE = "POST_FAILURE";
 
 export const PUT_WORKOUT_START = "PUT_START";
 export const PUT_WORKOUT_SUCCESS = "PUT_SUCCESS";
@@ -20,7 +19,7 @@ export const DELETE_WORKOUT_FAILURE = "DELETE_FAILURE";
 
 export const getWorkout = () => (dispatch) => {
   dispatch({ type: GET_WORKOUT_START });
-  Axios.get("http://localhost:8000/api/classes")
+  Axios.get("https://anywhere-fitness-3.herokuapp.com/api/classes")
     .then((res) => {
       console.log("Res.data: ", res.data);
       dispatch({ type: GET_WORKOUT_SUCCESS, payload: res.data });
@@ -30,26 +29,32 @@ export const getWorkout = () => (dispatch) => {
     });
 };
 
-export const postWorkout = () => (dispatch) => {
-  dispatch({ type: POST_WORKOUT_START });
+export const postUser = () => (dispatch) => {
+  dispatch({ type: POST_USER_START });
   axiosWithAuth()
     .post("/classes")
     .then((res) => {
-      dispatch({ type: POST_WORKOUT_SUCCESS, payload: res.data });
+      dispatch({ type: POST_USER_SUCCESS, payload: res.data });
     })
     .catch((error) => {
-      dispatch({ type: POST_WORKOUT_FAILURE, payload: error.response });
+      dispatch({ type: POST_USER_FAILURE, payload: error.response });
     });
 };
 
 //TODO fix this putWorkout function so it will allow you to edit data
-export const putWorkout = () => (dispatch) => {
+export const putWorkout = (id, newData) => (dispatch) => {
   dispatch({ type: PUT_WORKOUT_START });
-  const { id } = useParams();
   axiosWithAuth()
-    .put(`/classes/${id}`)
+    .put(`/classes/${id}`, newData)
     .then((res) => {
-      dispatch({ type: PUT_WORKOUT_SUCCESS, payload: res.data });
+      axiosWithAuth()
+        .get("/classes")
+        .then((res) =>
+          dispatch({
+            type: PUT_WORKOUT_SUCCESS,
+            payload: res.data,
+          }),
+        )
     })
     .catch((error) => {
       dispatch({ type: PUT_WORKOUT_FAILURE, payload: error.response });
@@ -57,9 +62,8 @@ export const putWorkout = () => (dispatch) => {
 };
 
 //TODO fix this deleteWorkout function so it will allow you to delete data
-export const deleteWorkout = () => (dispatch) => {
-  dispatch({ type: PUT_WORKOUT_START });
-  const { id } = useParams();
+export const deleteWorkout = (id) => (dispatch) => {
+  dispatch({ type: DELETE_WORKOUT_START });
   axiosWithAuth()
     .delete(`/classes/${id}`)
     .then((res) => {
