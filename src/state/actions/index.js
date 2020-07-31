@@ -1,6 +1,5 @@
 import { axiosWithAuth } from "../../utils/axiosWithAuth.js";
 import Axios from "axios";
-import { useParams } from "react-router-dom";
 
 export const GET_WORKOUT_START = "FETCH_START";
 export const GET_WORKOUT_SUCCESS = "FETCH_SUCCESS";
@@ -20,7 +19,7 @@ export const DELETE_WORKOUT_FAILURE = "DELETE_FAILURE";
 
 export const getWorkout = () => (dispatch) => {
   dispatch({ type: GET_WORKOUT_START });
-  Axios.get("http://localhost:8000/api/classes")
+  Axios.get("https://anywhere-fitness-3.herokuapp.com/api/classes")
     .then((res) => {
       console.log("Res.data: ", res.data);
       dispatch({ type: GET_WORKOUT_SUCCESS, payload: res.data });
@@ -43,9 +42,8 @@ export const postUser = () => (dispatch) => {
 };
 
 //TODO fix this putWorkout function so it will allow you to edit data
-export const putWorkout = (newData, onComplete) => (dispatch) => {
+export const putWorkout = (id, newData) => (dispatch) => {
   dispatch({ type: PUT_WORKOUT_START });
-  const { id } = useParams();
   axiosWithAuth()
     .put(`/classes/${id}`, newData)
     .then((res) => {
@@ -55,8 +53,7 @@ export const putWorkout = (newData, onComplete) => (dispatch) => {
           dispatch({
             type: PUT_WORKOUT_SUCCESS,
             payload: res.data,
-          }), 
-          onComplete()
+          }),
         )
     })
     .catch((error) => {
@@ -65,9 +62,8 @@ export const putWorkout = (newData, onComplete) => (dispatch) => {
 };
 
 //TODO fix this deleteWorkout function so it will allow you to delete data
-export const deleteWorkout = () => (dispatch) => {
+export const deleteWorkout = (id) => (dispatch) => {
   dispatch({ type: DELETE_WORKOUT_START });
-  const { id } = useParams();
   axiosWithAuth()
     .delete(`/classes/${id}`)
     .then((res) => {
