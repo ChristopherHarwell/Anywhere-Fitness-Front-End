@@ -1,11 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getWorkout, putWorkout } from "./state/actions/index.js";
+import {
+  getWorkout,
+  putWorkout,
+  deleteWorkout,
+} from "./state/actions/index.js";
 import Workouts from "./components/workout-form/Workouts.js";
 import "./App.css";
 import PrivateRoute from "./utils/PrivateRoute.js";
 import Header from "./components/header/header";
-import { Route, useHistory} from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import { Switch } from "react-router";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
@@ -15,15 +19,24 @@ import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
 
 function App(props) {
-  const { push } = useHistory();
+  const { push, goBack } = useHistory();
 
   function fetchWorkout(event) {
     event.preventDefault();
     props.getWorkout();
   }
   function editWorkout(event) {
-    push("/edit/classes");
     event.preventDefault();
+    push("/edit/classes");
+  }
+  function deleteWorkout(event) {
+    event.preventDefault();
+    props.deleteWorkout();
+  }
+  function saveWorkout(event) {
+    event.preventDefault();
+    props.putWorkout();
+    goBack();
   }
 
   return (
@@ -36,14 +49,21 @@ function App(props) {
       <br />
 
       <Switch>
-        <PrivateRoute exact path="/edit/classes">
-          <Workouts />
+        <PrivateRoute exact path="/edit/classes/:id">
+          <Workouts
+            saveWorkout={saveWorkout}
+            delete={props.deleteClasses}
+          />
         </PrivateRoute>
         <PrivateRoute exact path="/classes">
-          <WorkoutClasses edit={editWorkout} classes={props.getClasses}/>
-            <Button variant="outlined" onClick={fetchWorkout}>
-              Get Workouts
-            </Button>
+          <WorkoutClasses
+            edit={editWorkout}
+            classes={props.getClasses}
+            delete={deleteWorkout}
+          />
+          <Button variant="outlined" onClick={fetchWorkout}>
+            Get Workouts
+          </Button>
         </PrivateRoute>
         <Route path="/login">
           <Login />
@@ -55,17 +75,25 @@ function App(props) {
           <Home/>
         </Route>
       </Switch>
+
   
    <Footer/>
+
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
-  console.log("storeProps: ", state.putWorkout.classes);
+  console.log("storeProps: ", state.deleteWorkout.classes);
   return {
     getClasses: state.getWorkout.classes,
+    putClasses: state.putWorkout.classes,
+    delete: state.deleteWorkout.classes,
   };
 };
 
-export default connect(mapStateToProps, { getWorkout, putWorkout })(App);
+export default connect(mapStateToProps, {
+  getWorkout,
+  putWorkout,
+  deleteWorkout,
+})(App);
