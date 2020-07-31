@@ -28,7 +28,7 @@ function Register(props) {
    email: "",
    username: "", 
    password: "",
-   role_id: ""
+   role_id: "Student"
 
   });
 
@@ -151,7 +151,7 @@ function Register(props) {
         <br />
 
         {errors.password.length > 0 ? (
-          <p style={{ color: "red" }}>{errors.username}</p>
+          <p style={{ color: "red" }}>{errors.password}</p>
         ) : null}
         <FormInput
           type="password"
@@ -165,7 +165,7 @@ function Register(props) {
         <br />
 
         <div className="reg-instructor">
-        Are you a Student or Trainer?
+        Are you a Student or Instructor?
         <br/>
         <br/>
               <select 
@@ -174,9 +174,9 @@ function Register(props) {
               value={formState.role_id}
               onChange={inputChange}
               >
-                <option  value="client">Student</option>
+                <option value="Student">Student</option>
 
-                <option   value="instructor">Trainer</option>
+                <option value="Instructor">Instructor</option>
               </select>
         </div>
             <br/>
@@ -189,6 +189,9 @@ function Register(props) {
     >
     Register
     </Button>
+    <div>
+      <h5>You are registering as a/an {formState.role_id}</h5>
+    </div>
     </div>
   );
 }
