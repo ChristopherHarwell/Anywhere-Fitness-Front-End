@@ -1,25 +1,43 @@
 .header {
     display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-title {
-  
+    align-items: center;
     color: white;
-    background-color: rgb(8,8,8);
+    background-color: rgba(8,8,8, 0.7);
     display: flex;
     justify-content: center;
-    width: 80%;
-    text-align: center;
+    width: 100%;
+    height: 15vh;
+   
 }
 
 .nav-buttons {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
     padding: 30px;
-    width: 20%;
+    width: 10%;
+    
+    
 }
+
+.second-title {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: white;
+ 
+}
+
+.background-image {
+    background-image: url(../../assets/outdoors.jpg);
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
