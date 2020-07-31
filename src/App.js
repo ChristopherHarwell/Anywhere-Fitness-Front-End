@@ -11,7 +11,9 @@ import Login from "./components/login/login";
 import Register from "./components/register/register";
 import WorkoutClasses from "./components/classes/Workout-Classes.js";
 import { Button } from "@material-ui/core";
-import Footer from "./components/footer/footer"
+import Footer from "./components/footer/footer";
+import Home from "./components/home/home";
+
 function App(props) {
   const { push } = useHistory();
 
@@ -26,6 +28,7 @@ function App(props) {
 
   return (
     <div className="App">
+
       <Header />
       <br />
       <br />
@@ -37,7 +40,7 @@ function App(props) {
           <Workouts />
         </PrivateRoute>
         <PrivateRoute exact path="/classes">
-          <WorkoutClasses edit={editWorkout} classes={props.getClasses} />
+          <WorkoutClasses edit={editWorkout} classes={props.getClasses}/>
             <Button variant="outlined" onClick={fetchWorkout}>
               Get Workouts
             </Button>
@@ -48,7 +51,9 @@ function App(props) {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/"></Route>
+        <Route path="/">
+          <Home/>
+        </Route>
       </Switch>
       <br />
       <br />

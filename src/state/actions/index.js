@@ -20,7 +20,7 @@ export const DELETE_WORKOUT_FAILURE = "DELETE_FAILURE";
 
 export const getWorkout = () => (dispatch) => {
   dispatch({ type: GET_WORKOUT_START });
-  Axios.get("http://localhost:8000/api/classes")
+  Axios.get("https://anywhere-fitness-3.herokuapp.com/api/classes")
     .then((res) => {
       console.log("Res.data: ", res.data);
       dispatch({ type: GET_WORKOUT_SUCCESS, payload: res.data });

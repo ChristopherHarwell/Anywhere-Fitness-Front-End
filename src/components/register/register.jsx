@@ -10,8 +10,11 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 
 function Register() {
+
   const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const { push } = useHistory();
+
   const [formState, setFormState] = useState({
    first_name: "",
    last_name: "",
@@ -20,6 +23,7 @@ function Register() {
    password: "",
    role_id: ""
   });
+
   const [errors, setErrors] = useState({
     first_name: "",
    last_name: "",
@@ -159,19 +163,18 @@ function Register() {
         <br/>
         <br/>
               <select 
-           
+              name="role_id"
+              type="text"
               value={formState.role_id}
               onChange={inputChange}
               >
-                <option name="role_id" value="client">Student</option>
-                <option name="role_id" value="instructor">Trainer</option>
+                <option  value="client">Student</option>
+
+                <option   value="instructor">Trainer</option>
               </select>
         </div>
-         
-          
             <br/>
             <br/>
-     
     </form>
     
     <Button
