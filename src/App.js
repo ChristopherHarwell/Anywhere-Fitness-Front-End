@@ -46,7 +46,7 @@ function App(props) {
       <br />
 
       <Switch>
-        <PrivateRoute exact path="/edit/classes/:id">
+        <PrivateRoute exact path={`/edit/classes/:id`}>
           <Workouts
             saveWorkout={saveWorkout}
             delete={props.deleteClasses}
@@ -80,7 +80,7 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("storeProps: ", state.deleteWorkout.classes);
+  console.log("storeProps: ", state.getWorkout.classes.class_id);
   return {
     getClasses: state.getWorkout.classes,
     putClasses: state.putWorkout.classes,
