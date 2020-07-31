@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import registerSchema from "../../validation/registerSchema";
+
 import { postUser } from "../../state/actions/index.js";
+
 
 import { useHistory } from "react-router-dom";
 import "./register.styles.scss";
@@ -10,24 +12,33 @@ import Button from "@material-ui/core/Button";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { connect } from "react-redux";
 
+
+
+
 function Register(props) {
+
   const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const { push } = useHistory();
+
   const [formState, setFormState] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    username: "",
-    password: "",
-    role_id: null,
+
+   first_name: "",
+   last_name: "",
+   email: "",
+   username: "", 
+   password: "",
+   role_id: ""
+
   });
+
   const [errors, setErrors] = useState({
     first_name: "",
-    last_name: "",
-    email: "",
-    username: "",
-    password: "",
-    role_id: null,
+   last_name: "",
+   email: "",
+   username: "", 
+   password: "",
+   role_id: ""
   });
 
   useEffect(() => {
@@ -154,27 +165,30 @@ function Register(props) {
         <br />
 
         <div className="reg-instructor">
-          Are you a Student or Trainer?
-          <br />
-          <br />
-          <select
-            name="role_id"
-            value={formState.role_id}
-            onChange={inputChange}
-          >
-            <option>--Select One--</option>
-            <option value="1">Student</option>
-            <option value="2">Trainer</option>
-          </select>
+        Are you a Student or Trainer?
+        <br/>
+        <br/>
+              <select 
+              name="role_id"
+              type="text"
+              value={formState.role_id}
+              onChange={inputChange}
+              >
+                <option  value="client">Student</option>
+
+                <option   value="instructor">Trainer</option>
+              </select>
         </div>
-
-        <br />
-        <br />
-      </form>
-
-      <Button onClick={formSubmit} disabled={buttonDisabled}>
-        Register
-      </Button>
+            <br/>
+            <br/>
+    </form>
+    
+    <Button
+    onClick={formSubmit}
+    disabled={buttonDisabled}
+    >
+    Register
+    </Button>
     </div>
   );
 }
