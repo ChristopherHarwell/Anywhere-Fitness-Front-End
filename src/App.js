@@ -55,11 +55,8 @@ function App(props) {
           <Home/>
         </Route>
       </Switch>
-      <br />
-      <br />
-      <br />
-      <br />
-    <Footer/>
+  
+   <Footer/>
     </div>
   );
 }

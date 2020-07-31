@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import registerSchema from "../../validation/registerSchema";
-
 import { useHistory } from "react-router-dom";
 import './register.styles.scss';
 import FormInput from "../form-input/form-input";
