@@ -12,7 +12,6 @@ import {
 const WorkoutClasses = (props) => {
   const { push } = useHistory();
 
-
   function deleteExercise(id) {
     deleteWorkout(id);
   }
@@ -34,7 +33,11 @@ const WorkoutClasses = (props) => {
               <Typography>Start Date: {workout.date}</Typography>
               <Typography>Class ID: {workout.class_id}</Typography>
             </CardContent>
-            <Button onClick={editWorkout} variant="outlined" color="primary">
+            <Button
+              onClick={() => editWorkout(workout.id)}
+              variant="outlined"
+              color="primary"
+            >
               <Link to={`/edit/classes/${workout.class_id}`}>Edit</Link>
             </Button>
             {/* <Route path={`/edit/classes/${workout.class_id}`}></Route> */}
@@ -56,7 +59,6 @@ const mapStateToProps = (state) => {
   console.log("Workout-Classes: ", state.putWorkout);
   return {
     workouts: state.putWorkout.classes,
-    
   };
 };
 export default connect(mapStateToProps, { putWorkout })(WorkoutClasses);
