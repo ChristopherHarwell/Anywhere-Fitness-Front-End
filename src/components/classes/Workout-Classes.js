@@ -1,29 +1,18 @@
 import React, { useEffect } from "react";
 import { Card, CardContent, Typography, Button } from "@material-ui/core";
 import { Link, Route, useHistory } from "react-router-dom";
+import { deleteWorkout } from "../../state/actions/index";
 import { connect } from "react-redux";
-import {
-  putWorkout,
-  deleteWorkout,
-  getWorkout,
-} from "../../state/actions/index";
 
 //TODO add the rest of the workout data
 const WorkoutClasses = (props) => {
   const { push } = useHistory();
 
-  function deleteExercise(id) {
-    deleteWorkout(id);
-  }
-  function editWorkout(id) {
-    props.putWorkout(id);
-  }
-
   return (
     <>
       <div>
-        {props.classes.map((workout) => (
-          <Card>
+        {props.workouts.map((workout) => (
+          <Card key={workout.class_id}>
             <CardContent>
               <Typography variant="h5" gutterBottom>
                 Workout: {workout.name}
@@ -32,9 +21,9 @@ const WorkoutClasses = (props) => {
               <Typography>Type: {workout.type}</Typography>
               <Typography>Start Date: {workout.date}</Typography>
               <Typography>Class ID: {workout.class_id}</Typography>
+              <Typography>Start time: {workout.start_time}</Typography>
             </CardContent>
             <Button
-              onClick={() => editWorkout(workout.id)}
               variant="outlined"
               color="primary"
             >
@@ -42,7 +31,7 @@ const WorkoutClasses = (props) => {
             </Button>
             {/* <Route path={`/edit/classes/${workout.class_id}`}></Route> */}
             <Button
-              onClick={deleteExercise}
+              onClick={() => props.deleteWorkout(workout.class_id)}
               variant="outlined"
               color="secondary"
             >
@@ -56,9 +45,9 @@ const WorkoutClasses = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("Workout-Classes: ", state.putWorkout);
+  console.log("Workout-Classes: ", state.classesReducer);
   return {
-    workouts: state.putWorkout.classes,
+    workouts: state.classesReducer.classes,
   };
 };
-export default connect(mapStateToProps, { putWorkout })(WorkoutClasses);
+export default connect(mapStateToProps, { deleteWorkout })(WorkoutClasses);
