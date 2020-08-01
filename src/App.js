@@ -23,10 +23,7 @@ function App(props) {
     event.preventDefault();
     props.getWorkout();
   }
-  function editWorkout(event) {
-    event.preventDefault();
-    push("/edit/classes");
-  }
+
   function deleteWorkout() {
     props.deleteWorkout();
   }
@@ -35,6 +32,7 @@ function App(props) {
     props.putWorkout();
     goBack();
   }
+
 
   return (
     <div className="App">
@@ -53,7 +51,6 @@ function App(props) {
         </PrivateRoute>
         <PrivateRoute exact path="/classes">
           <WorkoutClasses
-            edit={editWorkout}
             classes={props.getClasses}
             delete={deleteWorkout}
           />

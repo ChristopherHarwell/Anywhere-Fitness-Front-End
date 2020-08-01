@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, makeStyles, Card, Button } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
-import { useHistory } from "react-router-dom";
-
+import { useHistory, useParams } from "react-router-dom";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { putWorkout, getWorkout } from "../../state/actions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,12 +24,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// TODO Take return data and save it to form state
+// TODO Reference that data to prepopulate form fields
+// TODO Perfom a PUT request to send that data to the backend
 function Workouts(props) {
   const classes = useStyles();
 
+  const { push } = useHistory();
+  function editWorkout(id, newData) {
+    putWorkout(id, newData);
+    console.log("ID: ", id, "New Data: ", newData);
+    push(`/classes`);
+  }
+
+  useEffect(() => {
+    props.getWorkout();
+  }, []);
+
+  const initialState = {
+    name: "",
+    instructor_id: Number(),
+    type_id: "",
+    date: "",
+    start_time: "",
+    duration: Number(),
+    intensity: "",
+    location: "",
+    number_of_attendees: Number(),
+    max_class_size: Number(),
+  };
+
   return (
     <Card className={classes.root}>
-      <form className={classes.form} noValidate autoComplete="off">
+      <form
+        className={classes.form}
+        onSubmit={editWorkout}
+        noValidate
+        autoComplete="off"
+      >
         <div>
           <TextField
             id="outlined-helperText"
@@ -91,4 +125,11 @@ function Workouts(props) {
     </Card>
   );
 }
-export default Workouts;
+const mapStateToProps = (state) => {
+  console.log("Workouts: ", state.getWorkout);
+  return {
+    workouts: state.putWorkout.classes,
+    getClasses: state.getWorkout.classes,
+  };
+};
+export default connect(mapStateToProps, { putWorkout, getWorkout })(Workouts);

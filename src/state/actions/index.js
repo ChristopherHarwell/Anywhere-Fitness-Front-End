@@ -48,7 +48,7 @@ export const putWorkout = (id, newData) => (dispatch) => {
     .put(`/classes/${id}`, newData)
     .then((res) => {
       axiosWithAuth()
-        .get("/classes")
+        .get(`/classes/${id}`)
         .then((res) =>
           dispatch({
             type: PUT_WORKOUT_SUCCESS,
