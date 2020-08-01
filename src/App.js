@@ -27,8 +27,7 @@ function App(props) {
     event.preventDefault();
     push("/edit/classes");
   }
-  function deleteWorkout(event) {
-    event.preventDefault();
+  function deleteWorkout() {
     props.deleteWorkout();
   }
   function saveWorkout(event) {
