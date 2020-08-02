@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const bar = styled.input`
-  background-color: gray;
+  background-color: light-gray;
   text: #20c8dd;
   padding: 0.2%;
 `;
