@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Card, CardContent, Typography, Button } from "@material-ui/core";
 import { Link, Route, useHistory } from "react-router-dom";
@@ -14,44 +13,6 @@ const WorkoutClasses = (props) => {
       <div>
         {props.workouts.map((workout) => (
           <Card key={workout.class_id}>
-
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, Typography, Button } from "@material-ui/core";
-import searchClass from "../searchClass";
-import axios from "axios";
-
-//TODO add the rest of the workout data
-const WorkoutClasses = (props) => {
-  const [classes, setClasses] = useState([]);
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("https://anywhere-fitness-3.herokuapp.com/api/classes")
-      .then((res) => {
-        console.log(res.data);
-        setClasses(res.data);
-      });
-  }, []);
-
-  const handleChange = (event) => {
-    setSearch(event.target.value);
-  };
-
-  const result = classes.filter((cls) => {
-    return cls.title.toLowerCase().includes(search);
-  });
-
-  
-  return (
-    <>
-      <div>
-        <center>
-          <searchClass value={search} onChange={handleChange} />
-        </center>
-        {props.classes.map((workout) => (
-          <Card>
-
             <CardContent>
               <Typography variant="h5" gutterBottom>
                 Workout: {workout.name}
@@ -59,7 +20,6 @@ const WorkoutClasses = (props) => {
               <Typography>Duration: {workout.duration} minutes</Typography>
               <Typography>Type: {workout.type}</Typography>
               <Typography>Start Date: {workout.date}</Typography>
-
               <Typography>Class ID: {workout.class_id}</Typography>
               <Typography>Start time: {workout.start_time}</Typography>
             </CardContent>
@@ -75,15 +35,6 @@ const WorkoutClasses = (props) => {
               variant="outlined"
               color="secondary"
             >
-
-            </CardContent>
-
-            <Button onClick={props.edit} variant="outlined" color="primary">
-              Edit
-            </Button>
-
-            <Button onClick={props.delete} variant="outlined" color="secondary">
-
               Delete
             </Button>
           </Card>
@@ -93,7 +44,6 @@ const WorkoutClasses = (props) => {
   );
 };
 
-
 const mapStateToProps = (state) => {
   console.log("Workout-Classes: ", state.classesReducer);
   return {
@@ -101,6 +51,3 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, { deleteWorkout })(WorkoutClasses);
-
-export default WorkoutClasses;
-

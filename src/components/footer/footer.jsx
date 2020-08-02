@@ -6,9 +6,9 @@ function Footer() {
   return (
     <div className="footer">
  
-Anywhere-Fitness
-<br/>
-Copyright © 2020
+ <h1 className="footer-title">
+ anywhere-fitness
+ </h1>
 
 
     </div>

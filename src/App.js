@@ -14,12 +14,9 @@ import Register from "./components/register/register";
 import WorkoutClasses from "./components/classes/Workout-Classes.js";
 import { Button } from "@material-ui/core";
 import Footer from "./components/footer/footer";
-import Home from "./components/home/home";
-
 function App(props) {
   return (
     <div className="App">
-
       <Header />
       <br />
       <br />
@@ -42,14 +39,13 @@ function App(props) {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/">
-          <Home/>
-        </Route>
+        <Route path="/"></Route>
       </Switch>
-
-  
-   <Footer/>
-
+      <br />
+      <br />
+      <br />
+      <br />
+      <Footer />
     </div>
   );
 }
