@@ -1,10 +1,5 @@
 import { combineReducers } from "redux";
 
-import {postUser, putWorkout, getWorkout, deleteWorkout} from "./index";
+import {classesReducer} from "./index";
 
-export default combineReducers({
-  putWorkout,
-  getWorkout,
-  postUser,
-  deleteWorkout
-});
+export default combineReducers({classesReducer});

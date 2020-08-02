@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   getWorkout,
-  putWorkout,
-  deleteWorkout,
 } from "./state/actions/index.js";
 import Workouts from "./components/workout-form/Workouts.js";
 import "./App.css";
@@ -19,26 +17,6 @@ import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
 
 function App(props) {
-  const { push, goBack } = useHistory();
-
-  function fetchWorkout(event) {
-    event.preventDefault();
-    props.getWorkout();
-  }
-  function editWorkout(event) {
-    event.preventDefault();
-    push("/edit/classes");
-  }
-  function deleteWorkout(event) {
-    event.preventDefault();
-    props.deleteWorkout();
-  }
-  function saveWorkout(event) {
-    event.preventDefault();
-    props.putWorkout();
-    goBack();
-  }
-
   return (
     <div className="App">
 
@@ -49,19 +27,12 @@ function App(props) {
       <br />
 
       <Switch>
-        <PrivateRoute exact path="/edit/classes/:id">
-          <Workouts
-            saveWorkout={saveWorkout}
-            delete={props.deleteClasses}
-          />
+        <PrivateRoute exact path={`/edit/classes/:id`}>
+          <Workouts />
         </PrivateRoute>
         <PrivateRoute exact path="/classes">
-          <WorkoutClasses
-            edit={editWorkout}
-            classes={props.getClasses}
-            delete={deleteWorkout}
-          />
-          <Button variant="outlined" onClick={fetchWorkout}>
+          <WorkoutClasses />
+          <Button variant="outlined" onClick={props.getWorkout}>
             Get Workouts
           </Button>
         </PrivateRoute>
@@ -84,16 +55,12 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("storeProps: ", state.deleteWorkout.classes);
+  console.log("Workout-Classes: ", state.classesReducer);
   return {
-    getClasses: state.getWorkout.classes,
-    putClasses: state.putWorkout.classes,
-    delete: state.deleteWorkout.classes,
+    workouts: state.classesReducer.classes,
   };
 };
 
 export default connect(mapStateToProps, {
   getWorkout,
-  putWorkout,
-  deleteWorkout,
 })(App);

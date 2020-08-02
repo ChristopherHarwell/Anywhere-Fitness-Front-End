@@ -4,14 +4,18 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 
-import reducer from "./state/reducers/rootReducer";
+import { configureStore } from '@reduxjs/toolkit'
 
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+import rootReducer from "./state/reducers/rootReducer";
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [thunk, logger]
+})
 
 ReactDOM.render(
   <Provider store={store}>

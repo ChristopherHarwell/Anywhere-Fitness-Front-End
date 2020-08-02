@@ -1,3 +1,4 @@
+import { initialState } from "./initialState";
 import {
   DELETE_WORKOUT_START,
   DELETE_WORKOUT_SUCCESS,
@@ -13,9 +14,7 @@ import {
   PUT_WORKOUT_FAILURE,
 } from "../actions";
 
-import { initialState } from "./initialState";
-
-export function deleteWorkout(state = initialState, action) {
+export function classesReducer(state = initialState, action) {
   switch (action.type) {
     case DELETE_WORKOUT_START:
       return {
@@ -35,13 +34,7 @@ export function deleteWorkout(state = initialState, action) {
         error: action.payload,
         isFetching: false,
       };
-    default:
-      return state;
-  }
-}
 
-export function getWorkout(state = initialState, action) {
-  switch (action.type) {
     case GET_WORKOUT_START:
       return {
         ...state,
@@ -60,13 +53,7 @@ export function getWorkout(state = initialState, action) {
         error: action.payload,
         isFetching: false,
       };
-    default:
-      return state;
-  }
-}
 
-export function postUser(state = initialState, action) {
-  switch (action.type) {
     case POST_USER_START:
       return {
         ...state,
@@ -85,13 +72,7 @@ export function postUser(state = initialState, action) {
         error: action.payload,
         isFetching: false,
       };
-    default:
-      return state;
-  }
-}
 
-export function putWorkout(state = initialState, action) {
-  switch (action.type) {
     case PUT_WORKOUT_START:
       return {
         ...state,
@@ -110,7 +91,7 @@ export function putWorkout(state = initialState, action) {
         error: action.payload,
         isFetching: false,
       };
-    default:
-      return state;
+      default:
+        return state;
   }
 }

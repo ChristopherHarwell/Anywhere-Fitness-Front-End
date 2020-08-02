@@ -19,7 +19,8 @@ export const DELETE_WORKOUT_FAILURE = "DELETE_FAILURE";
 
 export const getWorkout = () => (dispatch) => {
   dispatch({ type: GET_WORKOUT_START });
-  Axios.get("https://anywhere-fitness-3.herokuapp.com/api/classes")
+  axiosWithAuth()
+    .get("/classes")
     .then((res) => {
       console.log("Res.data: ", res.data);
       dispatch({ type: GET_WORKOUT_SUCCESS, payload: res.data });
@@ -41,7 +42,6 @@ export const postUser = () => (dispatch) => {
     });
 };
 
-//TODO fix this putWorkout function so it will allow you to edit data
 export const putWorkout = (id, newData) => (dispatch) => {
   dispatch({ type: PUT_WORKOUT_START });
   axiosWithAuth()
@@ -53,15 +53,14 @@ export const putWorkout = (id, newData) => (dispatch) => {
           dispatch({
             type: PUT_WORKOUT_SUCCESS,
             payload: res.data,
-          }),
-        )
+          })
+        );
     })
     .catch((error) => {
       dispatch({ type: PUT_WORKOUT_FAILURE, payload: error.response });
     });
 };
 
-//TODO fix this deleteWorkout function so it will allow you to delete data
 export const deleteWorkout = (id) => (dispatch) => {
   dispatch({ type: DELETE_WORKOUT_START });
   axiosWithAuth()

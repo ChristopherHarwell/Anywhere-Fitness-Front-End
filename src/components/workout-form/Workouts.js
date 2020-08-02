@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, makeStyles, Card, Button } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
-import { useHistory } from "react-router-dom";
-
+import { useHistory, useParams } from "react-router-dom";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { putWorkout, getWorkout } from "../../state/actions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,12 +24,60 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// TODO Take return data and save it to form state
+// TODO Reference that data to prepopulate form fields
+// TODO Perfom a PUT request to send that data to the backend
+
+const emptyState = {
+  name: "",
+  instructor_id: 0,
+  type_id: "",
+  date: "",
+  start_time: "",
+  duration: 0,
+  intensity: "",
+  location: "",
+  number_of_attendees: 0,
+  max_class_size: 0,
+};
+
 function Workouts(props) {
   const classes = useStyles();
+  const { id } = useParams();
+  const [formState, setFormState] = useState(emptyState);
+
+  const { push } = useHistory();
+
+  useEffect(() => {
+    props.getWorkout();
+  }, []);
+
+  useEffect(() => {
+    const currentWorkout = props.workouts.find(
+      (workout) => `${workout.class_id}` === id
+    );
+    setFormState(currentWorkout ?? emptyState);
+  }, [props.workouts]);
+
+  function handleChange(e) {
+    setFormState({...formState, [e.target.name]: e.target.value });
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const { class_id, type, instructor_username ,...workout} = formState;
+    props.putWorkout(id, { id: class_id, ...workout });
+    push(`/classes`);
+  }
 
   return (
     <Card className={classes.root}>
-      <form className={classes.form} noValidate autoComplete="off">
+      <form
+        className={classes.form}
+        onSubmit={handleSubmit}
+        noValidate
+        autoComplete="off"
+      >
         <div>
           <TextField
             id="outlined-helperText"
@@ -35,6 +85,9 @@ function Workouts(props) {
             defaultValue=""
             helperText="Name of Workout"
             variant="outlined"
+            name="name"
+            value={formState.name}
+            onChange={handleChange}
           />
 
           <TextField
@@ -43,6 +96,9 @@ function Workouts(props) {
             defaultValue=""
             helperText="Date of Workout"
             variant="outlined"
+            name="date"
+            value={formState.date}
+            onChange={handleChange}
           />
           <TextField
             id="outlined-helperText"
@@ -50,6 +106,9 @@ function Workouts(props) {
             defaultValue=""
             helperText="Time of Workout"
             variant="outlined"
+            name="start_time"
+            value={formState.start_time}
+            onChange={handleChange}
           />
           <TextField
             id="outlined-helperText"
@@ -57,6 +116,9 @@ function Workouts(props) {
             defaultValue=""
             helperText="Length of Workout"
             variant="outlined"
+            name="duration"
+            value={formState.duration}
+            onChange={handleChange}
           />
 
           <TextField
@@ -65,24 +127,18 @@ function Workouts(props) {
             defaultValue={props.name}
             helperText="Name of Instructor"
             variant="outlined"
-          />
-          <TextField
-            id="outlined-multiline-static"
-            label="About"
-            multiline
-            rows={4}
-            defaultValue=""
-            helperText="About the workout"
-            variant="outlined"
+            name="name"
+            value={formState.instructor_username}
+            onChange={handleChange}
           />
 
           <Button
+          type="submit"
             variant="contained"
             color="primary"
             size="medium"
             className={classes.button}
             startIcon={<SaveIcon />}
-            onClick={props.saveWorkout}
           >
             Save
           </Button>
@@ -91,4 +147,10 @@ function Workouts(props) {
     </Card>
   );
 }
-export default Workouts;
+const mapStateToProps = (state) => {
+  console.log("Workouts: ", state.classesReducer);
+  return {
+    workouts: state.classesReducer.classes,
+  };
+};
+export default connect(mapStateToProps, { putWorkout, getWorkout })(Workouts);
