@@ -19,9 +19,9 @@ const registerSchema = yup.object().shape({
   password: yup
     .string()
     .required("Required")
-    .min(6, "password must be at least 6 characters long"),
+    .min(2, "password must be at least 4 characters long"),
   role_id: yup
-    .string()
+    .boolean()  
 });
 
 export default registerSchema;
