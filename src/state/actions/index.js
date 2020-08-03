@@ -30,10 +30,10 @@ export const getWorkout = () => (dispatch) => {
     });
 };
 
-export const postUser = () => (dispatch) => {
+export const postUser = (newData) => (dispatch) => {
   dispatch({ type: POST_USER_START });
   axiosWithAuth()
-    .post("/classes")
+    .post("/auth/register", newData)
     .then((res) => {
       dispatch({ type: POST_USER_SUCCESS, payload: res.data });
     })

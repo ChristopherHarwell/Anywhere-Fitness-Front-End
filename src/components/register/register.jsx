@@ -38,12 +38,8 @@ function Register(props) {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    axiosWithAuth()
-      .post("auth/register", props.registerUser)
-      .then((res) => {
-        console.log(res.data);
-        push("/login");
-      });
+    props.postUser([formState]);
+    push("/login");
   };
 
   const inputChange = (e) => {
@@ -180,10 +176,10 @@ function Register(props) {
 }
 
 const mapStateToProps = (state) => {
+  console.log("Register: ", state.classesReducer)
   return {
-    registerUser: state.postUser.users,
+    user: state.classesReducer.classes,
   };
 };
 
-connect(mapStateToProps, { postUser })(Register);
-export default Register;
+export default connect(mapStateToProps, { postUser })(Register);
